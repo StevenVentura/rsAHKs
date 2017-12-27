@@ -1,0 +1,1 @@
+Taskkill /IM autohotkey.exe /F
