@@ -4,8 +4,8 @@
 // @version      0.1
 // @description  try to take over the world!
 // @author       You
+// @match        http://lucia.com/
 // @match        https://secure.runescape.com/m=account-creation/create_account?theme=oldschool
-// @match        https://secure.runescape.com/m=account-creation/*
 // @grant        GM_addStyle
 // @grant       GM.setValue
 // @grant       GM.getValue
@@ -26,10 +26,24 @@
 
     $(window).load(function(){
         (async () => {
+
+            if (location.href.indexOf("https://secure.runescape.com/m=account-creation/create_account?theme=oldschool") > -1)
+                {
+                slaveScript();
+
+                }
+                else if (location.href.indexOf("http://lucia.com/") > -1)
+            {
+                masterScript();
+
+            }
+
+
   console.log("hello world");
-if (location.href.indexOf("https://secure.runescape.com/m=account-creation/create_account?theme=oldschool") > -1)
-{
-        var botnumber = await GM.getValue("botnumber");
+
+            async function slaveScript()
+            {
+                var botnumber = await GM.getValue("botnumber");
         if (botnumber == "[object Promise]")
         {
             botnumber = 99;
@@ -51,20 +65,53 @@ var buttonboy = document.getElementById("create-submit")
 buttonboy.click()
     //location.href.indexOf("https://secure.runescape.com/m=account-creation/account_created") > -1
                 console.log("waiting for the second window to pop up");
-}
-            else
-            {
 
-            //wait for the new window to be  opened (for the captcha to be solved)
-            //https://secure.runescape.com/m=account-creation/account_created?tracker=2elMYbHRC0NcfcBX1CGepdYfix7lo*tgK9alPpZSumeahGD6RvKcMiMATCIlklvh&theme=oldschool
-console.log("it popped up");
-            //sleep a long time so it can allow more accounts to be created on a threshhold
-await sleep(300000);
-            //then open up a new page
-window.open("https://secure.runescape.com/m=account-creation/create_account?theme=oldschool");
+
+
+
             }
 
 
+            async function masterScript()
+            {
+
+               while(true)
+            {
+           var runescapeWebsite = window.open("https://secure.runescape.com/m=account-creation/create_account?theme=oldschool");
+await sleep(6666);
+
+//runescapeWebsite.addEventListener('load', async function() {
+    // your code here
+    console.log("onload happened");
+    console.log("onload happened");
+                //runescapeWebsite.close();
+
+
+
+
+
+
+//}, false);
+console.log("before the boy");
+
+                /*while (runescapeWebsite.location.href.indexOf("https://secure.runescape.com/m=account-creation/account_created") == -1)
+            {
+                await sleep(500);
+            }
+                */
+console.log("after the boy");
+          await sleep(60 * 1000 * 4);
+            runescapeWebsite.close();
+await sleep(1000);
+
+            }//end while true
+
+
+            }
+
+
+       /*
+            */
     })();
     })
 
